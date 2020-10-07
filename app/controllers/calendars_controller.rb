@@ -8,7 +8,6 @@ class CalendarsController < ApplicationController
 
   # 予定の保存
   def create
-    # binding.pry
     Plan.create(plan_params)
     redirect_to action: :index
   end
@@ -35,7 +34,7 @@ class CalendarsController < ApplicationController
       plan = plans.map do |plan| #mapは要素の数だけ繰り返し結果を配列に返す
         today_plans.push(plan.plan) if plan.date == @todays_date + x #pushは括弧の要素を配列に追加
       end
-      days = { :month => (@todays_date + x).month, :date => (@todays_date+x).day, :plans => today_plans, :wdays => (wdays[x])}
+      days = { month: (@todays_date + x).month, date: (@todays_date+x).day, plans: today_plans, wdays: (wdays[x])}
       @week_days.push(days) 
     end
 
