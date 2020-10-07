@@ -28,15 +28,15 @@ class CalendarsController < ApplicationController
 
     @week_days = []
 
-    plans = Plan.where(date: @todays_date..@todays_date + 6)
+    plans = Plan.where(date: @todays_date..@todays_date + 6) #whereはマッチしたDBの中身を吐き出す
 
-    7.times do |x|
+    7.times do |x| #７回繰り返す
       today_plans = []
-      plan = plans.map do |plan|
-        today_plans.push(plan.plan) if plan.date == @todays_date + x
+      plan = plans.map do |plan| #mapは要素の数だけ繰り返し結果を配列に返す
+        today_plans.push(plan.plan) if plan.date == @todays_date + x #pushは括弧の要素を配列に追加
       end
-      days = { :month => (@todays_date + x).month, :date => (@todays_date+x).day, :plans => today_plans}
-      @week_days.push(days)
+      days = { :month => (@todays_date + x).month, :date => (@todays_date+x).day, :plans => today_plans, :wdays => (wdays[x])}
+      @week_days.push(days) 
     end
 
   end
